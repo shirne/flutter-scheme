@@ -13,12 +13,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
-  static AppScheme appScheme = AppSchemeImpl.getInstance();
+  static AppScheme? appScheme = AppSchemeImpl.getInstance();
 
   @override
   void initState() {
     super.initState();
-    appScheme.getInitScheme().then((value) {
+    appScheme?.getInitScheme().then((value) {
       if (value != null) {
         setState(() {
           _platformVersion = "Init  ${value.dataString} map:${value.query}";
@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    appScheme.getLatestScheme().then((value) {
+    appScheme?.getLatestScheme().then((value) {
       if (value != null) {
         setState(() {
           _platformVersion = "Latest ${value.dataString}  map:${value.query}";
@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    appScheme.registerSchemeListener().listen((event) {
+    appScheme?.registerSchemeListener().listen((event) {
       if (event != null) {
         setState(() {
           _platformVersion = "listen ${event.dataString}  map:${event.query}";
